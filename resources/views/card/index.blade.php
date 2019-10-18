@@ -59,6 +59,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Add Checklist</h1>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form role="form" method="POST" action="">
