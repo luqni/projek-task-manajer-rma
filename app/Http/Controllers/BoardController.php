@@ -105,7 +105,12 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {
-        $board = \App\Board::where('id', $id)->delete();
+
+        $board = Board::find($id);
+
+        // $board = \App\Board::where('id', $id)->delete();
+
+        $board->delete();
 
         return redirect()->route('board')->withStatus(__('Board successfully deleted.'));
     }

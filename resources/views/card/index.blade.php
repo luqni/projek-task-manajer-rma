@@ -27,14 +27,14 @@
                                     <h4 class="card-title text-muted mb-0">{{$b->name}}</h5>
                                 </div>
                             </div>
-                            @if( auth()->user()->id == $b->user_id )
-                           <h5><a href="#" data-toggle="modal" data-target="#ModalLoginForm"> + Add Checklist {{$b->user_id}} </a></h5>
+                            @if( auth()->user()->id == $b->user_id || auth()->user()->id == 2 )
+                           <h5><a href="#" data-toggle="modal" data-target="#ModalLoginForm"> + Add Checklist </a></h5>
                            @endif
                         </div>
                     </div>
                     @endif
                 </div>
-                @if( auth()->user()->id == $b->user_id )
+                @if( auth()->user()->id == $b->user_id || auth()->user()->id == 2 )
                 <div class="col-xl-3 col-lg-6">
                     <div class="card-custom card-stats mb-4 mb-xl-0" data-clickable="true"><a href="board/create">
                         <div class="card-body">
@@ -44,6 +44,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
                 @endif
             </div>
             @endforeach
@@ -52,7 +53,7 @@
         </div>
         @include('layouts.footers.auth')
     </div>
-    <!-- Modal HTML Markup -->
+<!-- Modal HTML Markup -->
 <div id="ModalLoginForm" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

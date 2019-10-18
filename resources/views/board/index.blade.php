@@ -29,7 +29,7 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <form action="{{ route('board.destroy', $board) }}" method="post">
+                                        <form action="{{ route('board.destroy', $board->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <a class="dropdown-item" href="{{url('/board/card/' .$board->id)}}">{{ __('View') }}</a>
