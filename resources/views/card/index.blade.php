@@ -17,67 +17,66 @@
             </nav>
                 <!-- Card stats -->
             <div class="row">
-                @foreach($a->card as $b)
-                @if (!empty($a->card))
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card-custom card-stats mb-4 mb-xl-0" >
-                        <div class="card-body">
-                            <div class="row2">
-                                <div class="col">
-                                    <h4 class="card-title text-muted mb-0">{{$b->name}}</h5>
+            @foreach($a->card as $b)
+                <!-- tes -->
+                    <div class="col-lg-4 col-md-5">
+                        <div class="card bg-secondary shadow border-0">
+                            <div class="card-body px-lg-4 py-lg-4">
+                            <div class="text-muted text-center mt-2 mb-3">{{$b->name}}</div>
+                                <form method="post" action="{{ route('task.store') }}">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="ni ni-check-bold"></i></span>
+                                            </div>
+                                            <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Add your Task" required autofocus>
+                                            <input type="hidden" name="card_id" id="input-card-id" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ $b->id }}">
+                                            <input type="hidden" name="user_id" id="input-user-id" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ auth()->user()->id }}">
+                                            @if(auth()->user()->id == $b->user_id || auth()->user()->id == 2)
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-primary btn-sm ">{{ __('ADD') }}</button>
+                                            </div>
+                                            @else
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-primary btn-sm" disabled>{{ __('ADD') }}</button>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="card-custom card-stats mb-4 mb-xl-0" >
+                                   @include('task.index')
                                 </div>
                             </div>
-                            @if( auth()->user()->id == $b->user_id || auth()->user()->id == 2 )
-                           <h5><a href="#" data-toggle="modal" data-target="#ModalLoginForm"> + Add Checklist </a></h5>
-                           @endif
                         </div>
                     </div>
-                    @endif
-                </div>
+                
+                    @endforeach
+                <!-- batas -->
+                
                 @if( auth()->user()->id == $b->user_id || auth()->user()->id == 2 )
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card-custom card-stats mb-4 mb-xl-0" data-clickable="true"><a href="board/create">
-                        <div class="card-body">
-                            <div class="row3">
-                                <h4 class="center-content">+ Create New Card</h2>
+                <div class="col-lg-4 col-md-5">
+                    <div class="card bg-secondary shadow border-0">
+                        <div class="card-body px-lg-4 py-lg-4">
+                            <div class="card-custom card-stats mb-4 mb-xl-0" ><a href="board/create">
+                                <div class="card-body">
+                                    <div class="row">
+                                    <h4 class="center-content">+ Create New Card</h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    </a>
+                    <!-- Batas -->
                 </div>
                 </a>
                 @endif
             </div>
             @endforeach
-            @endforeach
         </div>
         </div>
         @include('layouts.footers.auth')
     </div>
-<!-- Modal HTML Markup -->
-<div id="ModalLoginForm" class="modal fade">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Add Checklist</h1>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form role="form" method="POST" action="">
-                    <input type="hidden" name="_token" value="">
-                    <div class="form-group">
-                        <label class="control-label">Your Checklist</label>
-                        <div>
-                            <input type="email" class="form-control input-lg" name="email" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div>
-                            <button type="submit" class="btn btn-success">Add</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 @endsection

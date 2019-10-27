@@ -33,10 +33,9 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-email">{{ __('Icon') }}</label>
-                                    <!-- <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email') }}" required> -->
-                                    <select class="form-control form-control-alternative{{ $errors->has('icons') ? ' is-invalid' : '' }}" >
+                                <div class="form-group{{ $errors->has('icons') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-icons">{{ __('Icon') }}</label>
+                                    <select id="input-name" name="icons" class="form-control form-control-alternative{{ $errors->has('icons') ? ' is-invalid' : '' }}" required autofocus>
                                         <option value="fa fa-cart-plus">&#xf217;  fa-cart-plus</option>
                                         <option value="fa fa-briefcase">&#xf0b1;  fa-briefcase</option>
                                         <option value="fa fa-credit-card">&#xf09d; fa-credit-card</option>
@@ -46,27 +45,16 @@
                                         <option value="fa fa-group">&#xf0c0;  fa-group</option>
                                         <option value="fa fa-coffee">&#xf0f4; fa-coffee</option>
                                     </select>
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
                                 </div>
-                                <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-password">{{ __('Color') }}</label>
-                                    <!-- <input type="password" name="password" id="input-password" class="form-control form-control-alternative{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" value="" required> -->
-                                    <select class="form-control" >
+                                <div class="form-group{{ $errors->has('bg_icon') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-bg_icon">{{ __('Color') }}</label>
+                                    <select id="input-name" name="bg_icon" class="form-control" >
                                         <option value="bg-primary">Ungu</option>
                                         <option value="bg-danger">Merah</option>
                                         <option value="bg-info">Biru</option>
                                         <option value="bg-success">Hijau</option>
                                         <option value="bg-warning">Orange</option>
                                     </select>
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>

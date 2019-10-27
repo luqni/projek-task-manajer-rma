@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Task;
+
 class TaskController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = \App\Task::all();
+        return view('task.index', ['tasks' => $tasks]);
+        // return (array(view('card.index')->with('tasks',$tasks), 'tasks' => $tasks));
     }
     /**
      * Show the form for creating a new resource.
@@ -30,22 +34,11 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Task $model)
     {
-        $this->validate($request, [
-            'card_id' => 'required|exists:cards,id',
-            'name'    => 'required|string'
-        ]);
-        // static model method?
-        $max_order_key = DB::table('tasks')
-                            ->where('card_id', request('card_id'))
-                            ->max('order_key');
-        $task = Task::create([
-            'card_id'   => request('card_id'),
-            'name'      => request('name'),
-            'order_key' => ++$max_order_key
-        ]);
-        return new TaskResource($task);
+        $model->create($request->all());
+
+        return redirect()->route('board/card/{id}')->withStatus(__('Task successfully created.'));
     }
     /**
      * Display the specified resource.

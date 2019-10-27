@@ -56,9 +56,20 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('board', ['as' => 'board', 'uses' => 'BoardController@index']);
 	Route::get('board/create', ['as' => 'board.create', 'uses' => 'BoardController@create']);
-	Route::get('board/card/{id}', ['as' => 'board.showById', 'uses' => 'BoardController@showById']);
+	Route::get('board/card/{id}',  'BoardController@showById')->name('showByid');
 	Route::post('board/save', ['as' => 'board.store', 'uses' => 'BoardController@store']);
 	Route::delete('board/delete/{id}', ['as' => 'board.destroy', 'uses' => 'BoardController@destroy']);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'UserController', ['except' => ['show']]);
+	Route::post('task', ['as' => 'task.store', 'uses' => 'TaskController@store']);
+
+});
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('testing', ['as' => 'task', 'uses' => 'TaskController@index']);
+
 });
 
 

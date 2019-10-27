@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Board;
+use App\Task;
 use Auth;
 use App\Http\Resources\BoardResource;
 
@@ -25,7 +26,13 @@ class BoardController extends Controller
         // $boards = \App\Board::all();
         // $boards = auth()->user()->id;
         $boards = \App\Board::all();
-        return view('board.index', ['boards' => $boards]);  
+        return view('board.index', ['boards' => $boards]);
+    }
+
+    public function getTask()
+    {
+        $tasks = \App\Task::all();
+        return view('task.index', ['tasks'=>$tasks]);
     }
 
     public function create()
@@ -36,7 +43,9 @@ class BoardController extends Controller
     public function showById($id)
     {
         $board = \App\Board::where('id', $id)->get();
-        return view('card.index', ['board' => $board]);
+        $tasks = \App\Task::all();
+        // return view('card.index', ['board' => $board]);
+        return view('card.index', compact('board','tasks')); 
     }
 
 
