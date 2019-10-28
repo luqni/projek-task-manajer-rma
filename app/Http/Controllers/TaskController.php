@@ -38,7 +38,7 @@ class TaskController extends Controller
     {
         $model->create($request->all());
 
-        return redirect()->route('board/card/{id}')->withStatus(__('Task successfully created.'));
+        return redirect()->back()->withStatus(__('Task successfully created.'));
     }
     /**
      * Display the specified resource.
@@ -80,25 +80,29 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        $task->delete();
+
+        return redirect()->back();
     }
-    public function updateOrder(Request $request)
+    public function done(Request $request, $id)
     {
-        $tasks = collect(request('items'));
-        // Loop over each task and update order_key column to be the array
-        // index from the posted data
-        $tasks->each(function($task_data, $key) {
-            $task = Task::find($task_data['id']);
-            // Validate task belongs to us
-            if (auth()->id() != $task->card->board->user_id) {
-                return;
-            }
-            // Update order_key and save
-            $task->order_key = $key;
+        switch ($request->input('action')){
+            case 'done':
+            //done
+            // $done = \App\Task::where('id', $id)->update('is_done', '=', 1);
+            $task = Task::find($id);
+            $task->is_done = 1;
             $task->save();
-        });
-        return response()->json(['data' => ['success' => true]]);
+            break;
+            
+            case 'delete':
+            $task = Task::find($id);
+            $task->delete();
+            break;
+        }
+        return redirect()->back();
     }
 }

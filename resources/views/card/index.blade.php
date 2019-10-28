@@ -23,7 +23,7 @@
                         <div class="card bg-secondary shadow border-0">
                             <div class="card-body px-lg-4 py-lg-4">
                             <div class="text-muted text-center mt-2 mb-3">{{$b->name}}</div>
-                                <form method="post" action="{{ route('task.store') }}">
+                                <form method="post" action="{{ route('task.store')}}">
                                     @csrf
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-alternative">
@@ -54,7 +54,7 @@
                 
                     @endforeach
                 <!-- batas -->
-                
+                @if(!$a->card->isEmpty())
                 @if( auth()->user()->id == $b->user_id || auth()->user()->id == 2 )
                 <div class="col-lg-4 col-md-5">
                     <div class="card bg-secondary shadow border-0">
@@ -72,6 +72,26 @@
                     <!-- Batas -->
                 </div>
                 </a>
+                @endif
+                @else
+                @if( auth()->user()->id == $a->user_id || auth()->user()->id == 2 )
+                <div class="col-lg-4 col-md-5">
+                    <div class="card bg-secondary shadow border-0">
+                        <div class="card-body px-lg-4 py-lg-4">
+                            <div class="card-custom card-stats mb-4 mb-xl-0" ><a href="{{route('home')}}">
+                                <div class="card-body">
+                                    <div class="row">
+                                    <h4 class="center-content">+ Create New Card</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <!-- Batas -->
+                </div>
+                </a>
+                @endif
                 @endif
             </div>
             @endforeach

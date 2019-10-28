@@ -38,6 +38,27 @@
                         <i class="ni ni-tv-2 text-orange"></i> Dashboard
                     </a>
                 </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/board">
+                        <i class="fas fa-tasks text-orange"></i> {{ __('Task') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Absensi') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="ni ni-key-25 text-info"></i> {{ __('Login') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="fas fa-user-cog text-orange"></i>
@@ -58,27 +79,6 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-               
-                <li class="nav-item">
-                    <a class="nav-link" href="/board">
-                        <i class="fas fa-tasks text-orange"></i> {{ __('Task') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Maps') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-key-25 text-info"></i> {{ __('Login') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
-                    </a>
                 </li>
                 <!-- <li class="nav-item mb-5" style="position: absolute; bottom: 0;">
                     <a class="nav-link" href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank">

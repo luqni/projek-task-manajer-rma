@@ -21991,3 +21991,9 @@ a:hover
 
     color: #ec8106;
 }
+
+.done-true {
+    text-decoration: line-through;
+    color: grey;
+  }
+
