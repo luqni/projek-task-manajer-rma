@@ -64,12 +64,15 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::post('task', ['as' => 'task.store', 'uses' => 'TaskController@store']);
+	Route::get('task/done/{id}', ['as' => 'task.done', 'uses' => 'TaskController@done']);
+	Route::delete('task/delete/{id}', ['as' => 'task.destroy', 'uses' => 'TaskController@destroy']);
 
 });
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('testing', ['as' => 'task', 'uses' => 'TaskController@index']);
-	Route::delete('task/done/{id}', ['as' => 'task.done', 'uses' => 'TaskController@done']);
+	Route::get('card/create/{id}', ['as' => 'card.create', 'uses' => 'CardController@create']);
+	Route::post('card/save', ['as' => 'card.store', 'uses' => 'CardController@store']);
+	Route::delete('card/delete/{id}', ['as' => 'card.destroy', 'uses' => 'CardController@destroy']);
 });
 
 

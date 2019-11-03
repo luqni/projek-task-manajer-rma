@@ -1,8 +1,33 @@
-
+<!-- Logic Progress Bar -->
+<?php
+$done = 0;
+$total = 0;
+$hasil = 0;
+$belum = 0;
+?>
+@foreach($b->task as $t)
+<?php
+$total++;
+?>
+@if($t->is_done == 1)
+<?php
+$done++;
+?>
+<!-- Selesai -->
+@endif
+<?php
+$hasil = round($done/$total * 100);
+$belum = 100 - $hasil;
+?>
+@endforeach
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{$hasil ?? ''}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{$hasil ?? ''}}%</div>
+  <div class="progress-bar bg-danger" role="progressbar" style="width: {{$belum ?? ''}}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">{{$belum ?? ''}}%</div>
+</div>
 <div class="card-body">
 <div class="row2">
         <div class="col">
-            <h5 class="card-title text-muted mb-0">List Task {{$b->name}} </h5>
+            <h5 class="card-title text-muted mb-0">List Task {{$b->name}}</h5>
         </div>
     </div>
     @foreach($tasks as $t)
@@ -25,15 +50,16 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <form action="{{ route('task.done', $t->id) }}" method="post">
+                                        <form action="{{ route('task.destroy', $t->id) }}" method="post">
                                         @csrf
                                         @method('delete')
+                                        <a class="dropdown-item" href="{{url('task/done/' .$t->id)}}">{{ __('Done') }}</a>
                                             <!-- <a class="dropdown-item" href="#">{{ __('Done') }}</a> -->
-                                            <button type="submit" class="dropdown-item" name="action" value="done">{{ __('Done') }}
                                             <button type="button" class="dropdown-item" name="action" value="delete" onclick="confirm('{{ __("Are you sure you want to delete Task?") }}') ? this.parentElement.submit() : ''">
                                                 {{ __('Delete') }}
                                             </button>
                                         </form>
+                                        <!-- <button type="button" class="dropdown-item" name="action" value="done">{{ __('Done') }}<a href="{{url('/task/done/' .$t->id)}}"></a> -->
                                 </div>
                             </div>
                         <!-- <button type="submit" class="btn btn-primary btn-sm ">{{ __('Done') }}</button> -->

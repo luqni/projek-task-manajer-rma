@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Card;
+use App\Board;
 use App\Http\Resources\CardResource;
 
 class CardController extends Controller
@@ -28,9 +29,10 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $board = \App\Board::where('id', $id)->get();
+        return view('card.create', compact('board'));
     }
     /**
      * Store a newly created resource in storage.
@@ -38,17 +40,11 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Card $model)
     {
-        $this->validate(request(), [
-            'board_id' => 'required|exists:boards,id',
-            'name'     => 'required'
-        ]);
-        $card = Card::create([
-            'board_id' => request('board_id'),
-            'name'     => request('name')
-        ]);
-        return new CardResource($card);
+        $model->create($request->all());
+
+        return redirect()->back()->withStatus(__('Card successfully created.'));
     }
     /**
      * Display the specified resource.
@@ -97,6 +93,9 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $card = Card::find($id);
+        $card->delete();
+
+        return redirect()->back();
     }
 }

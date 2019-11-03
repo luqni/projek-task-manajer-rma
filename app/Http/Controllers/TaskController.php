@@ -16,8 +16,15 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = \App\Task::all();
-        return view('task.index', ['tasks' => $tasks]);
+        $total = \App\Task::count();
+        return view('task.index', compact('total','tasks'));
         // return (array(view('card.index')->with('tasks',$tasks), 'tasks' => $tasks));
+    }
+    public function progress()
+    {
+        $count = Task::where(['is_done' => 1])->get()->count();
+
+        return View::make('task.index')->with('count', $count);
     }
     /**
      * Show the form for creating a new resource.
@@ -89,20 +96,9 @@ class TaskController extends Controller
     }
     public function done(Request $request, $id)
     {
-        switch ($request->input('action')){
-            case 'done':
-            //done
-            // $done = \App\Task::where('id', $id)->update('is_done', '=', 1);
-            $task = Task::find($id);
-            $task->is_done = 1;
-            $task->save();
-            break;
-            
-            case 'delete':
-            $task = Task::find($id);
-            $task->delete();
-            break;
-        }
+        $task = Task::find($id);
+        $task->is_done = 1;
+        $task->save();
         return redirect()->back();
     }
 }

@@ -10,7 +10,6 @@ class Task extends Model
         'name',
         'user_id',
         'card_id',
-        'due_on',
         'is_done',
         'order_key'
     ];
